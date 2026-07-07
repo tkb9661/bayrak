@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ömer KARTAL</title>
+    <title>Omer KARTAL</title>
     <style>
         /* Ekrandaki tüm varsayılan boşlukları sıfırlıyoruz */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         /* Sayfanın taşmasını engelliyor ve arka planı bayrak kırmızısı yapıyoruz */
@@ -34,21 +35,149 @@
             width: 80vw; /* Ekran genişliğinin %80'i */
             max-height: 90vh; /* Ekran yüksekliğinin %90'ı */
         }
+
+        /* --- MİNİMAL İLETİŞİM ALANI --- */
+        .contact-wrapper {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        /* Küçük Zarf Simge Butonu */
+        .contact-btn {
+            width: 45px;
+            height: 45px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+        }
+
+        .contact-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* İçerideki SVG Zarf İkonu */
+        .contact-btn svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        /* Gizli Küçük Form Kutusu */
+        .contact-box {
+            display: none;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+            width: 260px;
+            margin-bottom: 10px;
+        }
+
+        /* Form görünür olduğunda tetiklenecek sınıf */
+        .contact-box.active {
+            display: block;
+        }
+
+        .contact-box input, 
+        .contact-box textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 13px;
+            outline: none;
+            resize: none;
+        }
+
+        .contact-box input:focus, 
+        .contact-box textarea:focus {
+            border-color: #E30A17;
+        }
+
+        .contact-box button {
+            width: 100%;
+            padding: 8px;
+            background-color: #E30A17;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .contact-box button:hover {
+            background-color: #b50812;
+        }
     </style>
 </head>
 <body>
+
     <div class="container">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
             <rect width="1200" height="800" fill="#e30a17"/>
-            
             <circle cx="400" cy="400" r="200" fill="#fff"/>
-            
             <circle cx="450" cy="400" r="160" fill="#e30a17"/>
-            
             <g transform="translate(669, 400) rotate(270)">
                 <polygon points="0,-100 22.45,-30.9 95.11,-30.9 36.33,11.8 58.78,90.9 0,49.1 -58.78,90.9 -36.33,11.8 -95.11,-30.9 -22.45,-30.9" fill="#fff"/>
             </g>
         </svg>
     </div>
+
+    <!-- Sağ Alttaki Küçük İletişim Alanı -->
+    <div class="contact-wrapper">
+        
+        <!-- Küçük Form Kutusu (Varsayılan olarak gizli) -->
+        <div class="contact-box" id="contactBox">
+            <form id="mailForm">
+                <input type="text" id="subject" placeholder="Konu" required>
+                <textarea id="message" rows="3" placeholder="Mesajınız..." required></textarea>
+                <button type="submit">Gönder</button>
+            </form>
+        </div>
+
+        <!-- Zarf Butonu -->
+        <div class="contact-btn" onclick="toggleForm()">
+            <!-- Minimal Zarf Simgesi -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="#E30A17" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+        </div>
+
+    </div>
+
+    <script>
+        // Butona basıldığında kutuyu açıp kapatan fonksiyon
+        function toggleForm() {
+            const box = document.getElementById('contactBox');
+            box.classList.toggle('active');
+        }
+
+        // Form gönderme işlemi
+        document.getElementById('mailForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const myEmail = "iletisim@omerkartal.tr"; 
+            const subject = encodeURIComponent(document.getElementById('subject').value);
+            const message = encodeURIComponent(document.getElementById('message').value);
+            
+            window.location.href = `mailto:${myEmail}?subject=${subject}&body=${message}`;
+            
+            // Gönderdikten sonra kutuyu tekrar kapatır
+            document.getElementById('contactBox').classList.remove('active');
+        });
+    </script>
+
 </body>
 </html>
