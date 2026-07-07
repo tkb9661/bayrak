@@ -31,12 +31,20 @@
 </head>
 <body>
     <div class="container">
-        <!-- Kanuni Ölçülere Uygun Türk Bayrağı -->
+        <!-- 2893 Sayılı Kanun Oranlarına Göre Milimetrik Türk Bayrağı -->
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+            <!-- Arka Plan Al Renk (L = 1200, G = 800) -->
             <rect width="1200" height="800" fill="#e30a17"/>
+            
+            <!-- Ayın Dış Dairesi (Merkez X: A=400, Merkez Y: G/2=400, Çap B=400 -> Yarıçap R=200) -->
             <circle cx="400" cy="400" r="200" fill="#fff"/>
+            
+            <!-- Ayın İç Dairesi (Merkez X: A + C = 400 + 50 = 450, Merkez Y: 400, Çap D=320 -> Yarıçap R=160) -->
             <circle cx="450" cy="400" r="160" fill="#e30a17"/>
-            <g transform="translate(570, 400) rotate(270)">
+            
+            <!-- Yıldız Dairesi ve Yıldız (Merkez X: A + C + E + F/2 = 400 + 50 + 266.67 + 100 = 816.67) -->
+            <!-- Çap F=200 -> Yarıçap R=100. Yıldızın bir ucu tam sola (Aya) bakacak şekilde 270 derece döndürülmüştür. -->
+            <g transform="translate(816.67, 400) rotate(270)">
                 <polygon points="0,-100 22.45,-30.9 95.11,-30.9 36.33,11.8 58.78,90.9 0,49.1 -58.78,90.9 -36.33,11.8 -95.11,-30.9 -22.45,-30.9" fill="#fff"/>
             </g>
         </svg>
